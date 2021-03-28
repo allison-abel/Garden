@@ -15,7 +15,7 @@ public class UI {
 		int choice = Integer.parseInt(input.nextLine());
 
 		if (choice == 1) {
-			System.out.println("What zone do you live in? (Enter 2a-13b)");
+			System.out.println("What zone do you live in?");
 			String zone = input.nextLine();
 			System.out.println("What month is it?");
 			String month = input.nextLine();
