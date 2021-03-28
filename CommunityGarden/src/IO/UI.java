@@ -23,7 +23,7 @@ public class UI {
 			Crop[] cropList = manager.readCropList(filename, zone, month);
 			System.out.println("The following crop(s) can be planted in " + month + " in zone " + zone + ":");
 			for (int i = 0; i < GardenManager.getReturnCropSize(); i++) {
-				System.out.println(cropList[i].getName().toUpperCase() + " will be ready to be harvested in "
+				System.out.println(cropList[i].getName().toUpperCase() + ", which will be ready to be harvested in "
 						+ cropList[i].getMonthsHarvest()[GardenManager.getMonthPosition()] + "\n");
 			}
 
