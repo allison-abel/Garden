@@ -11,11 +11,11 @@ public class UI {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to the Community Garden Helper");
 		System.out.println(
-				"Please enter:" + "\n1 if you would like to find crops that can grow where you live" + "\n2 to quit\n");
+				"Please enter:" + "\n1 if you would like to learn about crops that can grow where you live" + "\n2 to quit\n");
 		int choice = Integer.parseInt(input.nextLine());
 
 		if (choice == 1) {
-			System.out.println("What zone do you live in?");
+			System.out.println("What zone do you live in? (Enter 2a-13b)");
 			String zone = input.nextLine();
 			System.out.println("What month is it?");
 			String month = input.nextLine();
