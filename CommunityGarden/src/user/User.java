@@ -3,7 +3,6 @@ package user;
 public class User {
 	String zone;
 	String month;
-	//String zone;
 	
 	public User(String zone, String month) {
 		setZone(zone);

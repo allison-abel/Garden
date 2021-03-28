@@ -7,6 +7,8 @@ import user.User;
 public class GardenManager {
 	Crop crop;
 	User user;
+	static int returnCropSize = 0;
+	static int monthPosition = 0;
 	
 	public GardenManager(String zone, String month) {
 		user = new User(zone, month);
@@ -15,18 +17,16 @@ public class GardenManager {
 	public Crop[] readCropList(String filename, String zone, String month) {
 		Crop[] crops = CropListReader.readCropsFromFile(filename);
 		Crop[] returnCrops = new Crop[CropListReader.getCropsSize()];
-		int k = 0;
 		for(int i = 0; i < CropListReader.getCropsSize(); i++) {
-			System.out.println("In loop for readCropList\n");
 			for(int j = 0; j < crops[i].getNumZones(); j++) {
-				System.out.println("The number of zones for crop " + i + " is " + crops[i].getNumZones());
 				for(int l = 0; l < crops[i].getNumMonths(); l++) {
-					if(crops[i].getZones()[j] == zone && (crops[i].getMonthsHarvest()[l] == month || crops[i].getMonthsSow()[l] == month)) {
-						returnCrops[k] = crops[i];
+					if((crops[i].getZones()[j].equals(zone)) && (crops[i].getMonthsSow()[l].equals(month))) {
+						returnCrops[returnCropSize] = crops[i];
+						returnCropSize++;
+						monthPosition = l;
 					}
 				}
 			}
-			k++;
 		}
 		return returnCrops;
 	}
@@ -34,4 +34,13 @@ public class GardenManager {
 	public String cropInformation() {
 		return crop.toString();
 	}
+	
+	public static int getReturnCropSize() {
+		return returnCropSize;
+	}
+	
+	public static int getMonthPosition() {
+		return monthPosition;
+	}
+
 }

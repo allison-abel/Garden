@@ -26,7 +26,7 @@ public class Crop {
 	}
 
 	public void setNumZones(int numZones) {
-		this.numMonths = numZones;
+		this.numZones = numZones;
 	}
 	
 	public int getNumZones() {
@@ -41,7 +41,6 @@ public class Crop {
 	}
 	
 	public String getName() {
-		System.out.println(name + "\n");
 		return name;
 	}
 	
