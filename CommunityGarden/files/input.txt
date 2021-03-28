@@ -9,3 +9,10 @@ cucumbers,3a,3b,4a,4b,May,June,9
 strawberries,2a,June,54
 onions,2a,2b,March,April,May,29
 chili peppers,4a,4b,5a,5b,7a,7b,June,10
+sweet potatoes,6a,6b,May,16
+tomatoes,10a,March,April,September,12
+squash,2a,2b,3a,3b,4a,4b,May,June,8
+watermelon,13a,13b,March,April,May,June,July,August,September,14
+tomatoes,8a,8b,April,May,June,July,12
+chili peppers,9a,9b,March,April,May,10
+watermelon,11a,12a,January,14
