@@ -1,4 +1,4 @@
-kale,2a,2b,3a,3b,4a,4b,April,May,June,July,!,8
-kale,5a,March,April,May,!,8
-kale,5b,March,April,!,8
-kale,6a,6b,July,August,!,8
+kale,2a,2b,3a,3b,4a,4b,April,May,June,July,8
+kale,5a,March,April,May,8
+kale,5b,March,April,8
+kale,6a,6b,July,August,8

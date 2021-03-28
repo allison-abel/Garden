@@ -1,22 +1,13 @@
 package user;
 
 public class User {
-	String location;
-	String month;
 	String zone;
+	String month;
+	//String zone;
 	
-	public User(String location, String month, String zone) {
-		setLocation(location);
-		setMonth(month);
+	public User(String zone, String month) {
 		setZone(zone);
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	
-	public String getLocation() {
-		return location;
+		setMonth(month);
 	}
 	
 	public void setMonth(String month) {

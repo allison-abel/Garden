@@ -7,11 +7,10 @@ import java.util.Scanner;
 import crop.Crop;
 
 public class CropListReader {
-	@SuppressWarnings("null")
+	static int cropsSize = 0;
+
 	public static Crop[] readCropsFromFile(String filepath) {
-		int i = 0;
-		Crop[] crops = null;
-		Crop crop = null;
+		Crop[] crops = new Crop[100];
 		File file = new File(filepath);
 		Scanner scan = null;
 
@@ -20,107 +19,128 @@ public class CropListReader {
 		} catch (FileNotFoundException e) {
 			System.out.println("File does not exist");
 		}
+		String line;
 		while (scan.hasNextLine()) {
-			String line = scan.nextLine();
-			crop = processLine(line);
-			crops[i] = crop;
+			line = scan.nextLine();
+			System.out.print("Line is: " + line + "\n");
+			Crop crop = processLine(line);
+			crops[cropsSize] = crop;
+			cropsSize++;
 		}
+		
 		scan.close();
 		return crops;
 	}
-
-	@SuppressWarnings("null")
+	
+	public static int getCropsSize() {
+		return cropsSize;
+	}
+	
+	
 	private static Crop processLine(String line) {
 		Scanner lineReader = new Scanner(line);
 		lineReader.useDelimiter(",");
 		String name = lineReader.next();
-		String[] zones = null;
+		System.out.println("Crop name is: " + name );
+		String[] zones = new String[24];
+		int numZones = 0;
 		String next = lineReader.next();
-		int i = 0;
-		while (next == "2a" || next == "2b" || next == "3a" || next == "3b" || next == "4a" || next == "4b"
-				|| next == "5a" || next == "5b" || next == "6a" || next == "6b" || next == "7a" || next == "7b"
-				|| next == "8a" || next == "8b" || next == "9a" || next == "9b" || next == "10a" || next == "10b"
-				|| next == "11a" || next == "11b" || next == "12a" || next == "12b" || next == "13a" || next == "13b") {
-			zones[i] = next;
-			i++;
+		while (Character.isDigit(next.charAt(0))) {
+			System.out.println("Next value: " + next + "\n");
+			zones[numZones] = next;
+			numZones++;
+			next = lineReader.next();
 		}
-		int j = 0;
-		String[] monthsSow = null;
-		next = lineReader.next();
-		while (next != "!") {
-			monthsSow[j] = next;
-			j++;
+		System.out.println("The number of zones is " + numZones + "\n");
+		String[] monthsSow = new String[12];
+		int numMonths = 0;
+		while (!Character.isDigit(next.charAt(0))) {
+			System.out.println("Next value: " + next + " on loop " + numMonths + "\n");
+			monthsSow[numMonths] = next;
+			numMonths++;
+			next = lineReader.next();
 		}
+		System.out.println("The number of months is " + numMonths + "\n");
 		int week = Integer.parseInt(next);
-		String[] monthsHarvest = findMonthsHarvest(monthsSow, week);
-
-		Crop crop = new Crop(name, zones, monthsSow, monthsHarvest);
+		System.out.println("Next value: " + next + "\n");
+		String[] monthsHarvest = findMonthsHarvest(monthsSow, week, numMonths);
+		Crop crop = new Crop(name, zones, monthsSow, monthsHarvest, numZones, numMonths);
 		lineReader.close();
 		return crop;
 	}
 
-	@SuppressWarnings("null")
-	private static String[] findMonthsHarvest(String[] monthsSow, int week) {
-		String[] monthsHarvest = null;
+	private static String[] findMonthsHarvest(String[] monthsSow, int week, int numMonths) {
+		System.out.println("Got to harvest method\n");
+		String[] monthsHarvest = new String[numMonths];
 		int monthNum = 0;
-		for (int i = 0; i < monthsSow.length; i++) {
-			if (monthsSow[i] == "January") {
+		for (int i = 0; i < numMonths; i++) {
+			System.out.println("The month I'm looking for is " + monthsSow[i] + "\n");
+			if (monthsSow[i].equals("January")) {
 				monthNum = 0;
-			} else if (monthsSow[i] == "February") {
+			} else if (monthsSow[i].equals("February")) {
 				monthNum = 1;
-			} else if (monthsSow[i] == "March") {
+			} else if (monthsSow[i].equals("March")) {
 				monthNum = 2;
-			} else if (monthsSow[i] == "April") {
+			} else if (monthsSow[i].equals("April")) {
+				System.out.println("Recognize the month is April\n");
 				monthNum = 3;
-			} else if (monthsSow[i] == "May") {
+			} else if (monthsSow[i].equals("May")) {
 				monthNum = 4;
-			} else if (monthsSow[i] == "June") {
+			} else if (monthsSow[i].equals("June")) {
 				monthNum = 5;
-			} else if (monthsSow[i] == "July") {
+			} else if (monthsSow[i].equals("July")) {
 				monthNum = 6;
-			} else if (monthsSow[i] == "August") {
+			} else if (monthsSow[i].equals("August")) {
 				monthNum = 7;
-			} else if (monthsSow[i] == "September") {
+			} else if (monthsSow[i].equals("September")) {
 				monthNum = 8;
-			} else if (monthsSow[i] == "October") {
+			} else if (monthsSow[i].equals("October")) {
 				monthNum = 9;
-			} else if (monthsSow[i] == "November") {
+			} else if (monthsSow[i].equals("November")) {
 				monthNum = 10;
-			} else if (monthsSow[i] == "December") {
+			} else if (monthsSow[i].equals("December")) {
 				monthNum = 11;
 			}
+			monthsHarvest[i] = newMonth(week, numMonths, monthNum);
+			System.out.println("The month for harvest of crop " + i + " is " + monthsHarvest[i] + "\n");
 		}
-		int numMonths = week / 4;
-		int newMonth = (numMonths + monthNum) % 12;
+			
+		return monthsHarvest;
+	}
+	
+	public static String newMonth(int week, int numMonths, int monthNum) {
+		int numMonthsAdd = week / 4;
+		System.out.println("The number of months to add is " + numMonthsAdd + "\n");
+		int newMonth = (numMonthsAdd + monthNum) % 12;
+		System.out.println("The new month is " + newMonth +"\n");
 
-		for (int i = 0; i < monthsSow.length; i++) {
+		for (int i = 0; i < numMonths; i++) {
 			if (newMonth == 0) {
-				monthsHarvest[i] = "January";
+				return "January";
 			} else if (newMonth == 1) {
-				monthsHarvest[i] = "February";
+				return "February";
 			} else if (newMonth == 2) {
-				monthsHarvest[i] = "March";
+				return "March";
 			} else if (newMonth == 3) {
-				monthsHarvest[i] = "April";
+				return "April";
 			} else if (newMonth == 4) {
-				monthsHarvest[i] = "May";
+				return "May";
 			} else if (newMonth == 5) {
-				monthsHarvest[i] = "June";
+				return "June";
 			} else if (newMonth == 6) {
-				monthsHarvest[i] = "July";
+				return "July";
 			} else if (newMonth == 7) {
-				monthsHarvest[i] = "August";
+				return "August";
 			} else if (newMonth == 8) {
-				monthsHarvest[i] = "September";
+				return "September";
 			} else if(newMonth == 9) {
-				monthsHarvest[i] = "October";
+				return "October";
 			} else if(newMonth == 10) {
-				monthsHarvest[i] = "November";
+				return "November";
 			} else if(newMonth == 11) {
-				monthsHarvest[i] = "December";
+				return "December";
 			}
 		}
-
-		return monthsHarvest;
+		return "No";
 	}
 }

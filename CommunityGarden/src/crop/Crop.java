@@ -5,19 +5,43 @@ public class Crop {
 	String[] zones;
 	String[] monthsSow;
 	String[] monthsHarvest;
+	int numZones;
+	int numMonths;
 	
-	public Crop(String name, String[] zones, String[] monthsSow, String[] monthsHarvest) {
+	public Crop(String name, String[] zones, String[] monthsSow, String[] monthsHarvest, int numZones, int numMonths) {
 		setName(name);
 		setZones(zones);
 		setMonthsSow(monthsSow);
 		setMonthsHarvest(monthsHarvest);
+		setNumZones(numZones);
+		setNumMonths(numMonths);
 	}
 	
+	public void setNumMonths(int numMonths) {
+		this.numMonths = numMonths;
+	}
+	
+	public int getNumMonths() {
+		return numMonths;
+	}
+
+	public void setNumZones(int numZones) {
+		this.numMonths = numZones;
+	}
+	
+	public int getNumZones() {
+		return numZones;
+	}
+
 	public void setName(String name) {
+		if(name.isBlank()) {
+			throw new IllegalArgumentException("name cannot be blank");
+		}
 		this.name = name;
 	}
 	
 	public String getName() {
+		System.out.println(name + "\n");
 		return name;
 	}
 	
