@@ -3,7 +3,7 @@ The Community Garden Helper Java Application allows the user to input their clim
 
 To learn more about what climate zone you live in, please visit: https://www.gardenate.com/zones/
 
-To view the data I used, click here: https://docs.google.com/spreadsheets/d/1cjTKOWUfhFPKULWCOLCwNjvP0biq2SXx-stCtaO1Zsk/edit?usp=sharing
+To view the data I used for the crop seasons, click here: https://docs.google.com/spreadsheets/d/1cjTKOWUfhFPKULWCOLCwNjvP0biq2SXx-stCtaO1Zsk/edit?usp=sharing
 
 # Website
 I started to build a website from scratch but ran short on time. Feel free to look at it, but there isn't much there
